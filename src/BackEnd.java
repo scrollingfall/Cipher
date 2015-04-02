@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.nio.file.Files;
 public class BackEnd {
 	private ArrayList<String>usernames=new ArrayList<String>();
 	private ArrayList<Encoder>encoders=new ArrayList<Encoder>();
@@ -53,6 +54,14 @@ public class BackEnd {
 				filenamerepeats.put(two, 0);
 			}
 			encoders.add(new Encoder(two+"("+filenamerepeats.get(two)+").txt"));
+			File f=new File("Usernames.txt");
+			f.delete();
+			PrintWriter writer = new PrintWriter("Usernames.txt");
+			for(String x:getUsers())
+			{
+				writer.println(x);
+			}
+			writer.close();
 		}
 	}
 	public List<String> getUsers(){
