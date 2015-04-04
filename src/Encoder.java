@@ -20,6 +20,8 @@ public class Encoder {
 		}
 	}
 	
+	//Null char is x00 and newLine is x0A, so it should be ok since I'm adding.
+	//Else, I can create a special case somehow...
 	private String encode(String in){
 		char[] key2=key.toCharArray();
 		char[] ca=in.toCharArray();
