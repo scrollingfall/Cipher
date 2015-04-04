@@ -53,9 +53,7 @@ public FrontEnd()
 //*/
 //*/
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.util.*;
 public class FrontEnd 
@@ -77,12 +75,26 @@ public class FrontEnd
 	private JComboBox<String> selectuser=new JComboBox(backend.getUsers().toArray());
 	public FrontEnd()
 	{
+		//Defining Components
 		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(300,100);
-		frame.setSize(400,400);
-		main.setLayout(new GridLayout(2,1));
-		addmsg.setLayout(new GridLayout(4,1));
-		addmsg.add(new Label("Enter a username and a message"));
+		frame.setSize(400,400);	
+		addmsgbutton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				frame.setContentPane(addmsg);
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+		getmsgbutton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				frame.setContentPane(getmsg);
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
 		user.addFocusListener(new FocusListener(){
 			public void focusGained(FocusEvent e) {
 				if(usershowprompt)
@@ -105,10 +117,10 @@ public class FrontEnd
 		});
 		user.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent arg0) {
-				
+
 			}
 			public void keyReleased(KeyEvent arg0) {
-				
+
 			}
 			public void keyTyped(KeyEvent arg0) {
 				usershowprompt=false;
@@ -116,18 +128,15 @@ public class FrontEnd
 		});
 		msg.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent arg0) {
-				
+
 			}
 			public void keyReleased(KeyEvent arg0) {
-				
+
 			}
 			public void keyTyped(KeyEvent arg0) {
 				msgshowprompt=false;
 			}
 		});
-		addmsg.add(user);
-		addmsg.add(msg);
-		addmsg.add(submit);
 		submit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
@@ -156,57 +165,60 @@ public class FrontEnd
 				frame.repaint();
 			}
 		});
-		getmsg.setLayout(new GridLayout(4,1));
-		getmsg.add(new JLabel("Select An User"));
 		selectuser.setEditable(false);
 		selectuser.setSelectedItem(null);
 		selectuser.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				ArrayList<String>tempmsgs=backend.getMessages(selectuser.getItemAt(selectuser.getSelectedIndex()));
-				msgs.setText("");
-				for(String x:tempmsgs)
+				if (selectuser.getSelectedItem()!=null) 
 				{
-					msgs.append(x+"\n");
+					String s=(String)selectuser.getSelectedItem();
+					if(backend.getUsers().contains(s))
+					{
+						ArrayList<String> tempmsgs = backend.getMessages(selectuser.getItemAt(selectuser.getSelectedIndex()));
+						msgs.setText("");
+						for (String x : tempmsgs) {
+							msgs.append(x + "\n");
+						}
+						frame.revalidate();
+						frame.repaint();
+					}
+					else
+					{
+						msgs.setText("Invalid Username");
+					}
 				}
-				frame.revalidate();
-				frame.repaint();
 			}
-		});
+		});	
 		msgs.setEditable(false);
 		back.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
 				frame.setContentPane(main);
-				selectuser.setEnabled(false);
-				//selectuser.setSelectedItem(null);
+				selectuser.setSelectedItem(null);
 				msgs.setText("");
 				frame.revalidate();
 				frame.repaint();
-				selectuser.setEnabled(true);
 			}
 		});
+		
+		//Creating the Layout of the Frame
+		main.setLayout(new GridLayout(2,1));
+		main.add(addmsgbutton);
+		main.add(getmsgbutton);
+		
+		addmsg.setLayout(new GridLayout(4,1));
+		addmsg.add(new Label("Enter a username and a message"));
+		addmsg.add(user);
+		addmsg.add(msg);
+		addmsg.add(submit);	
+		
+		getmsg.setLayout(new GridLayout(4,1));
+		getmsg.add(new JLabel("Select An User"));
 		getmsg.add(selectuser);
 		getmsg.add(msgs);
 		getmsg.add(back);
-		addmsgbutton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				frame.setContentPane(addmsg);
-				frame.revalidate();
-				frame.repaint();
-			}
-		});
-		getmsgbutton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				frame.setContentPane(getmsg);
-				frame.revalidate();
-				frame.repaint();
-			}
-		});
-		main.add(addmsgbutton);
-		main.add(getmsgbutton);
+
 		frame.setContentPane(main);
 		frame.setVisible(true);
 	}
