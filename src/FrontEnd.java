@@ -72,7 +72,7 @@ public class FrontEnd
 	private JTextArea msgs=new JTextArea();
 	private boolean usershowprompt=true;
 	private boolean msgshowprompt=true;
-	private JComboBox selectuser=new JComboBox(backend.getUsers().toArray());
+	private JComboBox<String> selectuser=new JComboBox(backend.getUsers().toArray());
 	public FrontEnd()
 	{
 		//Defining Components
