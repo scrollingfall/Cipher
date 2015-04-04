@@ -1,4 +1,4 @@
-/*/
+//*/
 import java.awt.*;
 
 import javax.swing.*;
@@ -51,7 +51,7 @@ public FrontEnd()
 	myFrame.setVisible(true);
 }}
 //*/
-//*/
+/*/
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
