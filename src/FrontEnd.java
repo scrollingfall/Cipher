@@ -69,58 +69,145 @@ public class FrontEnd
 	private JButton back=new JButton ("Back to Main Screen");
 	private JButton submit=new JButton ("Submit Message");
 	private BackEnd backend=new BackEnd();
-	private JTextField user=new JTextField();
-	private JTextField msg=new JTextField();
+	private JTextField user=new JTextField("Enter Username Here");
+	private JTextField msg=new JTextField("Enter Message Here");
 	private JTextArea msgs=new JTextArea();
-	private JComboBox selectuser=new JComboBox(backend.getUsers().toArray());
+	private boolean usershowprompt=true;
+	private boolean msgshowprompt=true;
+	private JComboBox<String> selectuser=new JComboBox(backend.getUsers().toArray());
 	public FrontEnd()
 	{
 		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(300,100);
 		frame.setSize(400,400);
 		main.setLayout(new GridLayout(2,1));
-		addmsg.setLayout(new GridLayout(3,1));
+		addmsg.setLayout(new GridLayout(4,1));
+		addmsg.add(new Label("Enter a username and a message"));
+		user.addFocusListener(new FocusListener(){
+			public void focusGained(FocusEvent e) {
+				if(usershowprompt)
+					user.setText("");
+			}
+			public void focusLost(FocusEvent e) {
+				if(usershowprompt)
+					user.setText("Enter Username Here");
+			}
+		});
+		msg.addFocusListener(new FocusListener(){
+			public void focusGained(FocusEvent e) {
+				if(msgshowprompt)
+					msg.setText("");
+			}
+			public void focusLost(FocusEvent e) {
+				if(msgshowprompt)
+					msg.setText("Enter Message Here");
+			}
+		});
+		user.addKeyListener(new KeyListener(){
+			public void keyPressed(KeyEvent arg0) {
+				
+			}
+			public void keyReleased(KeyEvent arg0) {
+				
+			}
+			public void keyTyped(KeyEvent arg0) {
+				usershowprompt=false;
+			}
+		});
+		msg.addKeyListener(new KeyListener(){
+			public void keyPressed(KeyEvent arg0) {
+				
+			}
+			public void keyReleased(KeyEvent arg0) {
+				
+			}
+			public void keyTyped(KeyEvent arg0) {
+				msgshowprompt=false;
+			}
+		});
 		addmsg.add(user);
 		addmsg.add(msg);
 		addmsg.add(submit);
 		submit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				frame.remove(addmsg);
+				frame.setContentPane(main);
 				try {
-					backend.addMessage(user.getText(), msg.getText());
-					user.setText("");
-					msg.setText("");
+					if(!user.getText().isEmpty()&&!msg.getText().isEmpty()&&!usershowprompt&&!msgshowprompt)
+					{
+						backend.addMessage(user.getText(), msg.getText());
+						if(!backend.getUsers().contains(user.getText()))
+						{
+							selectuser.addItem(user.getText());
+						}
+						user.setText("Enter Username Here");
+						msg.setText("Enter Message Here");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(frame,"Invalid Username/Message: No Message Added");
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				frame.add(main);
+				usershowprompt=true;
+				msgshowprompt=true;
+				frame.revalidate();
 				frame.repaint();
 			}
 		});
-		getmsg.setLayout(new GridLayout(3,1));
+		getmsg.setLayout(new GridLayout(4,1));
+		getmsg.add(new JLabel("Select An User"));
+		selectuser.setEditable(false);
+		selectuser.setSelectedItem(null);
+		selectuser.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				ArrayList<String>tempmsgs=backend.getMessages(selectuser.getItemAt(selectuser.getSelectedIndex()));
+				msgs.setText("");
+				for(String x:tempmsgs)
+				{
+					msgs.append(x+"\n");
+				}
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+		msgs.setEditable(false);
+		back.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				frame.setContentPane(main);
+				selectuser.setEnabled(false);
+				//selectuser.setSelectedItem(null);
+				msgs.setText("");
+				frame.revalidate();
+				frame.repaint();
+				selectuser.setEnabled(true);
+			}
+		});
 		getmsg.add(selectuser);
 		getmsg.add(msgs);
 		getmsg.add(back);
 		addmsgbutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				frame.remove(main);
-				frame.add(addmsg);
+				frame.setContentPane(addmsg);
+				frame.revalidate();
 				frame.repaint();
 			}
 		});
 		getmsgbutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				frame.remove(main);
-				
+				frame.setContentPane(getmsg);
+				frame.revalidate();
 				frame.repaint();
 			}
 		});
 		main.add(addmsgbutton);
 		main.add(getmsgbutton);
-		frame.add(main);
+		frame.setContentPane(main);
 		frame.setVisible(true);
 	}
 } 

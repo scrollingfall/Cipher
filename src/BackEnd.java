@@ -48,6 +48,7 @@ public class BackEnd {
 		if(usernames.contains(name))
 		{
 			encoders.get(usernames.indexOf(name)).write(message);
+			System.out.println(encoders.get(usernames.indexOf(name)).read().size());
 		}
 		else
 		{
@@ -62,7 +63,10 @@ public class BackEnd {
 			{
 				filenamerepeats.put(two, 0);
 			}
-			encoders.add(new Encoder(two+"("+filenamerepeats.get(two)+").txt"));
+			Encoder e=new Encoder(two+"("+filenamerepeats.get(two)+").txt");
+			encoders.add(e);
+			e.write(message);
+			System.out.println(e.read());
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Usernames.txt", true)));
 			out.println(name);
 			out.close();
@@ -73,8 +77,15 @@ public class BackEnd {
 		Collections.sort(newlist);
 		return newlist;
 	}
+	//*/
 	public static void main(String[]args)
 	{
-		new BackEnd();
+		BackEnd b=new BackEnd();
+		try {
+			b.addMessage("Jerry","Test Message");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	//*/
 }
