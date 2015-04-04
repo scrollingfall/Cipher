@@ -1,5 +1,10 @@
 import java.util.*;
 import java.io.*;
+//<<<<<<< HEAD
+//import java.nio.file.Files;
+
+//=======
+//>>>>>>> origin/master
 public class BackEnd {
 	private ArrayList<String>usernames=new ArrayList<String>();
 	private ArrayList<Encoder>encoders=new ArrayList<Encoder>();
