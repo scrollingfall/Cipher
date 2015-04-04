@@ -50,6 +50,7 @@ public FrontEnd()
 	myFrame.pack();
 	myFrame.setVisible(true);
 }}
+//*/
 /*/
 import java.awt.*;
 import javax.swing.*;
@@ -174,7 +175,7 @@ public class FrontEnd
 					String s=(String)selectuser.getSelectedItem();
 					if(backend.getUsers().contains(s))
 					{
-						ArrayList<String> tempmsgs = backend.getMessages((String)selectuser.getItemAt(selectuser.getSelectedIndex()));
+						ArrayList<String> tempmsgs = backend.getMessages(selectuser.getItemAt(selectuser.getSelectedIndex()));
 						msgs.setText("");
 						for (String x : tempmsgs) {
 							msgs.append(x + "\n");
