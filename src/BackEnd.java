@@ -5,31 +5,40 @@ public class BackEnd {
 	private ArrayList<String>usernames=new ArrayList<String>();
 	private ArrayList<Encoder>encoders=new ArrayList<Encoder>();
 	private Map<String, Integer>filenamerepeats=new HashMap<String,Integer>();
-	public BackEnd() throws Exception
+	public BackEnd()
 	{
-		Scanner scan=new Scanner(new File("Usernames.txt"));
-		while(scan.hasNextLine())
-		{
-			String s=scan.nextLine();
-			if(!usernames.contains(s))
+		try{
+			Scanner scan=new Scanner(new File("Usernames.txt"));	
+			while(scan.hasNextLine())
 			{
-				usernames.add(s);
-				String two=new String(s.toCharArray());
-				two.replaceAll("[\\/:\\*?\"<>|]","");
-				if(filenamerepeats.containsKey(two))
+				String s=scan.nextLine();
+				if(!usernames.contains(s))
 				{
-					filenamerepeats.put(two,filenamerepeats.get(two)+1);
+					usernames.add(s);
+					String two=new String(s.toCharArray());
+					two.replaceAll("[\\/:\\*?\"<>|]","");
+					if(filenamerepeats.containsKey(two))
+					{
+						filenamerepeats.put(two,filenamerepeats.get(two)+1);
+					}
+					else
+					{
+						filenamerepeats.put(two, 0);
+					}
+					encoders.add(new Encoder(two+"("+filenamerepeats.get(two)+").txt"));
 				}
-				else
-				{
-					filenamerepeats.put(two, 0);
-				}
-				encoders.add(new Encoder(two+"("+filenamerepeats.get(two)+").txt"));
 			}
+			scan.close();
 		}
-		scan.close();
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+
+
 	}
-	public List<String> getMessages(String user){
+	public ArrayList<String> getMessages(String user){
 		if(usernames.contains(user))
 			return encoders.get(usernames.indexOf(user)).read();
 		else
@@ -54,19 +63,18 @@ public class BackEnd {
 				filenamerepeats.put(two, 0);
 			}
 			encoders.add(new Encoder(two+"("+filenamerepeats.get(two)+").txt"));
-			File f=new File("Usernames.txt");
-			f.delete();
-			PrintWriter writer = new PrintWriter("Usernames.txt");
-			for(String x:getUsers())
-			{
-				writer.println(x);
-			}
-			writer.close();
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Usernames.txt", true)));
+			out.println(name);
+			out.close();
 		}
 	}
-	public List<String> getUsers(){
-		List<String>newlist=new ArrayList<String>(usernames);
+	public ArrayList<String> getUsers(){
+		ArrayList<String>newlist=new ArrayList<String>(usernames);
 		Collections.sort(newlist);
 		return newlist;
+	}
+	public static void main(String[]args)
+	{
+		new BackEnd();
 	}
 }

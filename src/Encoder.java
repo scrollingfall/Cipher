@@ -33,10 +33,10 @@ public class Encoder {
 		return out;
 	}
 	
-	public List<String> read(){
+	public ArrayList<String> read(){
 		try {
 			Scanner scan=new Scanner(file);
-			List<String> l=new ArrayList<String>();
+			ArrayList<String> l=new ArrayList<String>();
 			l.add(decode(scan.nextLine()));
 			return l;
 		} catch (FileNotFoundException e) {
