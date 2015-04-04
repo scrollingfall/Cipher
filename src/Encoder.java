@@ -13,7 +13,7 @@ public class Encoder {
 	public void write(String in){
 		try {
 			PrintWriter o=new PrintWriter(new FileWriter(file,true));
-			o.println(in);
+			o.println(encode(in));
 			o.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,7 +37,9 @@ public class Encoder {
 		try {
 			Scanner scan=new Scanner(file);
 			ArrayList<String> l=new ArrayList<String>();
+			while(scan.hasNextLine()){
 			l.add(decode(scan.nextLine()));
+			}
 			return l;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
