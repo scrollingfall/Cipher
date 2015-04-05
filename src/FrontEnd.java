@@ -1,4 +1,4 @@
-//*/
+/*/
 import java.awt.*;
 
 import javax.swing.*;
@@ -50,7 +50,6 @@ public FrontEnd()
 	myFrame.pack();
 	myFrame.setVisible(true);
 }}
-//*/
 /*/
 import java.awt.*;
 import javax.swing.*;
@@ -72,7 +71,7 @@ public class FrontEnd
 	private JTextArea msgs=new JTextArea();
 	private boolean usershowprompt=true;
 	private boolean msgshowprompt=true;
-	private JComboBox<String> selectuser=new JComboBox(backend.getUsers().toArray());
+	private JComboBox<String> selectuser=new JComboBox<String>((String[])backend.getUsers().toArray());
 	public FrontEnd()
 	{
 		//Defining Components
