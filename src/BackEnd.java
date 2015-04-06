@@ -47,7 +47,7 @@ public class BackEnd {
 		if(usernames.contains(name))
 		{
 			encoders.get(usernames.indexOf(name)).write(message);
-			System.out.println(encoders.get(usernames.indexOf(name)).read().size());
+			//System.out.println(encoders.get(usernames.indexOf(name)).read().size());
 		}
 		else
 		{
@@ -65,7 +65,7 @@ public class BackEnd {
 			Encoder e=new Encoder(two+"("+filenamerepeats.get(two)+").txt");
 			encoders.add(e);
 			e.write(message);
-			System.out.println(e.read());
+			//System.out.println(e.read());
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Usernames.txt", true)));
 			out.println(name);
 			out.close();

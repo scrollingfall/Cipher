@@ -145,11 +145,18 @@ public class FrontEnd
 				try {
 					if(!user.getText().isEmpty()&&!msg.getText().isEmpty()&&!usershowprompt&&!msgshowprompt)
 					{
-						backend.addMessage(user.getText(), msg.getText());
 						if(!backend.getUsers().contains(user.getText()))
 						{
 							selectuser.addItem(user.getText());
+							//selectuser=new JComboBox<String>(backend.getUsers().toArray(new String[backend.getUsers().size()]));
+							getmsg=new JPanel(); //updating the combo box-for some reason, doesn't work automatically, so im doing it manually
+							getmsg.setLayout(new GridLayout(4,1));
+							getmsg.add(new JLabel("Select An User"));
+							getmsg.add(selectuser);
+							getmsg.add(msgs);
+							getmsg.add(back);
 						}
+						backend.addMessage(user.getText(), msg.getText());
 						user.setText("Enter Username Here");
 						msg.setText("Enter Message Here");
 					}
@@ -173,9 +180,9 @@ public class FrontEnd
 			{
 				if (selectuser.getSelectedItem()!=null) 
 				{
-					String s=(String)selectuser.getSelectedItem();
-					if(backend.getUsers().contains(s))
-					{
+					//String s=(String)selectuser.getSelectedItem();
+					//if(backend.getUsers().contains(s))
+					//{
 						ArrayList<String> tempmsgs = backend.getMessages(selectuser.getItemAt(selectuser.getSelectedIndex()));
 						msgs.setText("");
 						for (String x : tempmsgs) {
@@ -183,11 +190,11 @@ public class FrontEnd
 						}
 						frame.revalidate();
 						frame.repaint();
-					}
-					else
-					{
-						msgs.setText("Invalid Username");
-					}
+					//}
+					//else
+					//{
+					//	msgs.setText("Invalid Username");
+					//}
 				}
 			}
 		});	
