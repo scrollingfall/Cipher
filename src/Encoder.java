@@ -28,6 +28,7 @@ public class Encoder {
 		for(int i=0;i<ca.length;i++){
 			//ca[i]+=key2[i%key.length()];
 			ca[i]+=5;
+			ca[i]%=128;
 		}
 		String out="";
 		for(int i=0;i<ca.length;i++){
@@ -57,6 +58,8 @@ public class Encoder {
 		for(int i=0;i<ca.length;i++){
 			//ca[i]-=key2[i%key.length()];
 			ca[i]-=5;
+			ca[i]+=128;
+			ca[i]%=128;
 		}
 		String out="";
 		for(int i=0;i<ca.length;i++){
