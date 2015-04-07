@@ -71,6 +71,7 @@ public class FrontEnd
 	private JTextArea msgs=new JTextArea();
 	private boolean usershowprompt=true;
 	private boolean msgshowprompt=true;
+	private JScrollPane scroll=new JScrollPane(msgs);
 	//private JComboBox<String> selectuser=new JComboBox<String>(Arrays.copyOf(backend.getUsers().toArray(),backend.getUsers().toArray().length,String[].class));
 	private JComboBox<String>selectuser=new JComboBox<String>(backend.getUsers().toArray(new String[backend.getUsers().size()]));
 	//private JComboBox<String>selectuser=new JComboBox(backend.getUsers().toArray());
@@ -80,7 +81,6 @@ public class FrontEnd
 		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(300,100);
 		frame.setSize(400,400);	
-		JScrollPane scroll=new JScrollPane(msgs);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		addmsgbutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
