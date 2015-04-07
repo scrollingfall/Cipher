@@ -26,13 +26,15 @@ public class Encoder {
 		char[] key2=key.toCharArray();
 		char[] ca=in.toCharArray();
 		for(int i=0;i<ca.length;i++){
-			ca[i]+=key2[i%key.length()];
+			//ca[i]+=key2[i%key.length()];
+			ca[i]+=5;
 		}
 		String out="";
 		for(int i=0;i<ca.length;i++){
 			out+=ca[i];
 		}
 		return out;
+		//return in;
 	}
 	
 	public ArrayList<String> read(){
@@ -53,13 +55,15 @@ public class Encoder {
 		char[] key2=key.toCharArray();
 		char[] ca=in.toCharArray();
 		for(int i=0;i<ca.length;i++){
-			ca[i]-=key2[i%key.length()];
+			//ca[i]-=key2[i%key.length()];
+			ca[i]-=5;
 		}
 		String out="";
 		for(int i=0;i<ca.length;i++){
 			out+=ca[i];
 		}
 		return out;
+		//return in;
 	}
 	
 	public static void main(String[] args) {
