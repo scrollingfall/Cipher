@@ -151,12 +151,12 @@ public class FrontEnd
 						{
 							selectuser.addItem(user.getText());
 							//selectuser=new JComboBox<String>(backend.getUsers().toArray(new String[backend.getUsers().size()]));
-							getmsg=new JPanel(); //updating the combo box-for some reason, doesn't work automatically, so im doing it manually
-							getmsg.setLayout(new GridLayout(4,1));
-							getmsg.add(new JLabel("Select An User"));
-							getmsg.add(selectuser);
-							getmsg.add(scroll);
-							getmsg.add(back);
+							//getmsg=new JPanel(); //updating the combo box-for some reason, doesn't work automatically, so im doing it manually
+							//getmsg.setLayout(new GridLayout(4,1));
+							//getmsg.add(new JLabel("Select An User"));
+							//getmsg.add(selectuser);
+							//getmsg.add(scroll);
+							//getmsg.add(back);
 						}
 						backend.addMessage(user.getText(), msg.getText());
 						user.setText("Enter Username Here");
