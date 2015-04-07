@@ -31,7 +31,15 @@ public class BackEnd {
 		}
 		catch(FileNotFoundException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
+			try {
+				PrintWriter o=new PrintWriter(new File("Usernames.txt"));
+				o.print("");
+				o.close();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 
