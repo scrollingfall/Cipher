@@ -46,7 +46,7 @@ public class Encoder {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<String>();
 	}
 	
 	public String decode(String in){
@@ -67,7 +67,10 @@ public class Encoder {
 		String in="My name is bob! HI Bob";
 		String out=(e.encode(in));
 		System.out.println(out);
-		System.out.println(e.decode(out));
+		
+		String test="HI Man";
+		String out2=(e.encode(test));
+		System.out.println(e.decode(out2));
 		
 	}
 }
