@@ -41,7 +41,7 @@ public class BackEnd {
 		if(usernames.contains(user))
 			return encoders.get(usernames.indexOf(user)).read();
 		else
-			return null;
+			return new ArrayList<String>();
 	}
 	public void addMessage(String name, String message)throws Exception{
 		if(usernames.contains(name))

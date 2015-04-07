@@ -80,6 +80,8 @@ public class FrontEnd
 		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(300,100);
 		frame.setSize(400,400);	
+		JScrollPane scroll=new JScrollPane(msgs);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		addmsgbutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
@@ -153,7 +155,7 @@ public class FrontEnd
 							getmsg.setLayout(new GridLayout(4,1));
 							getmsg.add(new JLabel("Select An User"));
 							getmsg.add(selectuser);
-							getmsg.add(msgs);
+							getmsg.add(scroll);
 							getmsg.add(back);
 						}
 						backend.addMessage(user.getText(), msg.getText());
@@ -169,6 +171,7 @@ public class FrontEnd
 				}
 				usershowprompt=true;
 				msgshowprompt=true;
+				selectuser.setSelectedItem(null);
 				frame.revalidate();
 				frame.repaint();
 			}
@@ -199,6 +202,7 @@ public class FrontEnd
 			}
 		});	
 		msgs.setEditable(false);
+		
 		back.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
@@ -224,7 +228,7 @@ public class FrontEnd
 		getmsg.setLayout(new GridLayout(4,1));
 		getmsg.add(new JLabel("Select An User"));
 		getmsg.add(selectuser);
-		getmsg.add(msgs);
+		getmsg.add(scroll);
 		getmsg.add(back);
 
 		frame.setContentPane(main);
