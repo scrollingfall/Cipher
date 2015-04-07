@@ -22,7 +22,7 @@ public class Encoder {
 	
 	//Null char is x00 and newLine is x0A, so it should be ok since I'm adding.
 	//Else, I can create a special case somehow...
-	private String encode(String in){
+	public String encode(String in){
 		char[] key2=key.toCharArray();
 		char[] ca=in.toCharArray();
 		for(int i=0;i<ca.length;i++){
@@ -49,7 +49,7 @@ public class Encoder {
 		return null;
 	}
 	
-	private String decode(String in){
+	public String decode(String in){
 		char[] key2=key.toCharArray();
 		char[] ca=in.toCharArray();
 		for(int i=0;i<ca.length;i++){
@@ -60,5 +60,14 @@ public class Encoder {
 			out+=ca[i];
 		}
 		return out;
+	}
+	
+	public static void main(String[] args) {
+		Encoder e=new Encoder("");
+		String in="My name is bob! HI Bob";
+		String out=(e.encode(in));
+		System.out.println(out);
+		System.out.println(e.decode(out));
+		
 	}
 }
